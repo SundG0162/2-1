@@ -13,6 +13,18 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnCrouchUpEvent;
     public event Action OnAttackEvent;
 
+    private Controls _controls;
+
+    private void OnEnable()
+    {
+        if(_controls == null)
+        {
+            _controls = new Controls();
+            _controls.Player.SetCallbacks(this);
+        }
+        _controls.Player.Enable();
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         OnAttackEvent?.Invoke();
