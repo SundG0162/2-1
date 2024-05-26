@@ -9,9 +9,11 @@ public enum PlayerStateEnum
 {
     Idle,
     Run,
-    Jump,
+    JumpingUp,
     Fall,
-    Attack
+    Land,
+    Attack,
+    SideRun
 }
 public class Player : Agent
 {
@@ -60,38 +62,4 @@ public class Player : Agent
     {
         _stateMachine.CurrentState.UpdateState();
     }
-
-    #region InputEventHandles
-    private void OnEnable()
-    {
-        PlayerInput.OnMoveEvent += HandleOnMoveEvent;
-        PlayerInput.OnJumpEvent += HandleOnJumpEvent;
-        PlayerInput.OnAttackEvent += HandleOnAttackEvent;
-    }
-
-    private void OnDisable()
-    {
-        PlayerInput.OnMoveEvent -= HandleOnMoveEvent;
-        PlayerInput.OnJumpEvent -= HandleOnJumpEvent;
-        PlayerInput.OnAttackEvent -= HandleOnAttackEvent;
-    }
-
-
-    private void HandleOnMoveEvent(Vector2 movement)
-    {
-        MovementCompo.SetMovement(new Vector3(movement.x, 0, movement.y) * moveSpeed);
-    }
-
-    private void HandleOnJumpEvent()
-    {
-    }
-
-    private void HandleOnAttackEvent()
-    {
-    }
-
-
-
-
-    #endregion
 }

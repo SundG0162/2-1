@@ -54,6 +54,7 @@ public class PlayerMovement : AgentMovement
         Vector3 right = transform.right;
         right.y = 0;
         Vector3 velocity = forward * _movement.z + right * _movement.x;
+        velocity.y = _velocity.y;
         return velocity;
     }
 

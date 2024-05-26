@@ -14,6 +14,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnCrouchDownEvent;
     public event Action OnCrouchUpEvent;
     public event Action OnAttackEvent;
+    public Vector2 MoveInput {  get; private set; }
 
     private Controls _controls;
 
@@ -51,6 +52,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         Vector2 input = context.ReadValue<Vector2>();
         OnMoveEvent?.Invoke(input);
+        MoveInput = input;
     }
 
     public void OnCameraRotate(InputAction.CallbackContext context)

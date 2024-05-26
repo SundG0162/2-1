@@ -1,12 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRunState : PlayerGroundState
+public class PlayerSideRunState : PlayerGroundState
 {
     private Vector3 _movementDirection;
-    public PlayerRunState(PlayerStateMachine stateMachine, Player player, string animBoolname) : base(stateMachine, player, animBoolname)
+    public PlayerSideRunState(PlayerStateMachine stateMachine, Player player, string animBoolname) : base(stateMachine, player, animBoolname)
     {
     }
 
@@ -20,6 +19,7 @@ public class PlayerRunState : PlayerGroundState
 
     private void HandleOnMoveEvent(Vector2 movement)
     {
+        Debug.Log(movement);
         _movementDirection = new Vector3(movement.x, 0, movement.y) * _player.moveSpeed;
     }
 
@@ -31,9 +31,9 @@ public class PlayerRunState : PlayerGroundState
         {
             _stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
-        if (Mathf.Abs(_player.PlayerInput.MoveInput.y) < inputThreshold)
+        if (!(Mathf.Abs(_player.PlayerInput.MoveInput.y) < inputThreshold))
         {
-            _stateMachine.ChangeState(PlayerStateEnum.SideRun);
+            _stateMachine.ChangeState(PlayerStateEnum.Run);
         }
         _player.MovementCompo.SetMovement(_movementDirection);
     }
