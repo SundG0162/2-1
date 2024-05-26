@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraRotate",
+                    "type": "Value",
+                    "id": "eedfe056-7579-4b5f-93a3-cd21f1c08145",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -57,7 +66,7 @@
                 {
                     "name": "up",
                     "id": "686df2db-e3e0-461a-9973-7324cea12439",
-                    "path": "",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
@@ -68,7 +77,7 @@
                 {
                     "name": "down",
                     "id": "a251c6d2-8036-4080-9143-934e5a85733d",
-                    "path": "",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
@@ -79,7 +88,7 @@
                 {
                     "name": "left",
                     "id": "9aa8457f-f1e4-4b58-ad95-63ce0cd2952b",
-                    "path": "",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
@@ -90,7 +99,7 @@
                 {
                     "name": "right",
                     "id": "520f81b2-4a0b-4050-bb2b-a3dd90eabc49",
-                    "path": "",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
@@ -128,6 +137,17 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab35fedc-ca17-4d17-8f40-29327fc6b07c",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

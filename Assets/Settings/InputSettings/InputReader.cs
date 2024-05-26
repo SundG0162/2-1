@@ -5,15 +5,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
 
+[CreateAssetMenu(menuName = "InputReaderSO")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action<Vector2> OnMoveEvent;
+    public event Action<Vector2> OnCameraRotateEvent;
     public event Action OnJumpEvent;
     public event Action OnCrouchDownEvent;
     public event Action OnCrouchUpEvent;
     public event Action OnAttackEvent;
 
     private Controls _controls;
+
+    public Vector2 CamDelta { get; private set; }
 
     private void OnEnable()
     {
@@ -47,5 +51,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         Vector2 input = context.ReadValue<Vector2>();
         OnMoveEvent?.Invoke(input);
+    }
+
+    public void OnCameraRotate(InputAction.CallbackContext context)
+    {
+        CamDelta = context.ReadValue<Vector2>();
     }
 }
