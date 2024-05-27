@@ -29,7 +29,7 @@ public class PlayerSlidingState : PlayerGroundState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_player.moveSpeed > 0.2f)
+        if (_player.moveSpeed >= 0.05f)
             _player.moveSpeed -= 10f * Time.deltaTime;
     }
 
