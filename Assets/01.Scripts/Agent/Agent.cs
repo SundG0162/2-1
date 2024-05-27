@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,4 +18,15 @@ public abstract class Agent : MonoBehaviour
     }
 
     public virtual void Attack() { }
+
+    public Coroutine StartDelayCallBack(float delayTime, Action CallBack)
+    {
+        return StartCoroutine(DelayCoroutine(delayTime, CallBack));
+    }
+
+    protected IEnumerator DelayCoroutine(float delayTime, Action CallBack)
+    {
+        yield return new WaitForSeconds(delayTime);
+        CallBack?.Invoke();
+    }
 }

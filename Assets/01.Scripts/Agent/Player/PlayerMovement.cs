@@ -6,24 +6,36 @@ public class PlayerMovement : AgentMovement
 
     [Header("Camera Settings")]
     [SerializeField]
+    private Transform _visualCamTrm;
+    [SerializeField]
     private Transform _playerMainCam;
     [SerializeField]
     private float _sensivityX = 8f;
     [SerializeField]
     private float _sensivityY = 4f;
+    private Vector3 _defaultMainCamLocalPos;
 
     [SerializeField] private float _upperLookLimit = -70.0f, _lowerLookLimit = 70.0f;
 
-
+    private bool _canRotateVelocity = true;
+    private bool _lockRotateXAxis = false;
     private float _xRotation = 0;
     private Vector2 _cameraRotDelta;
+    private Vector3 _slidingDirection;
 
     private Vector3 _movement;
 
     private void Start()
     {
         _player = GetComponent<Player>();
+        _defaultMainCamLocalPos = _playerMainCam.localPosition;
     }
+
+    public void ModifyLockCameraXAxisRotate(bool active)
+    {
+        _lockRotateXAxis = active;
+    }
+
     public void SetCameraRotate(Vector2 delta)
     {
         _cameraRotDelta.x = delta.y * _sensivityX * Time.deltaTime;
@@ -33,7 +45,7 @@ public class PlayerMovement : AgentMovement
 
     protected override void FixedUpdate()
     {
-        _velocity = GetRotateVelocity();
+        _velocity = GetRotateVelocity() * _player.moveSpeed;
         base.FixedUpdate();
     }
 
@@ -47,20 +59,46 @@ public class PlayerMovement : AgentMovement
         _movement = movement * Time.fixedDeltaTime;
     }
 
-    private Vector3 GetRotateVelocity()
+    public Vector3 GetRotateVelocity()
     {
-        Vector3 forward = transform.forward;
-        forward.y = 0;
-        Vector3 right = transform.right;
-        right.y = 0;
-        Vector3 velocity = forward * _movement.z + right * _movement.x;
-        velocity.y = _velocity.y;
-        return velocity;
+        if (_canRotateVelocity)
+        {
+            Vector3 forward = transform.forward;
+            forward.y = 0;
+            Vector3 right = transform.right;
+            right.y = 0;
+            Vector3 velocity = forward * _movement.z + right * _movement.x;
+            velocity.y = _velocity.y;
+            _slidingDirection = velocity;
+            return velocity;
+        }
+        else
+            return _slidingDirection;
+        
+    }
+
+    public void ModifyRotateVelocity(bool active)
+    {
+        _canRotateVelocity = active;
+    }
+
+    public void ModifyFollowHeadCam(bool active)
+    {
+        if(active)
+        {
+            _playerMainCam.SetParent(_visualCamTrm);
+        }
+        else
+        {
+            _playerMainCam.SetParent(_player.transform);
+            _playerMainCam.localPosition = _defaultMainCamLocalPos;
+        }
     }
 
     private void CameraRotate()
     {
         SetCameraRotate(_player.PlayerInput.CamDelta);
+        if (_lockRotateXAxis) return;
         _xRotation -= _cameraRotDelta.x;
 
         _xRotation = Mathf.Clamp(_xRotation, _upperLookLimit, _lowerLookLimit);

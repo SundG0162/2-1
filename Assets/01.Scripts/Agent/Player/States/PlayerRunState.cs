@@ -20,7 +20,7 @@ public class PlayerRunState : PlayerGroundState
 
     private void HandleOnMoveEvent(Vector2 movement)
     {
-        _movementDirection = new Vector3(movement.x, 0, movement.y) * _player.moveSpeed;
+        _movementDirection = new Vector3(movement.x, 0, movement.y);
     }
 
     public override void UpdateState()

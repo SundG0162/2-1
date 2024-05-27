@@ -13,11 +13,20 @@ public abstract class PlayerGroundState : PlayerState
     {
         base.Enter();
         _player.PlayerInput.OnJumpEvent += HandleOnJumpEvent;
+        _player.PlayerInput.OnCrouchDownEvent += HandleOnCrouchDownEvent;
+    }
+
+    private void HandleOnCrouchDownEvent()
+    {
+        if (_player.MovementCompo.IsGround)
+        {
+            _stateMachine.ChangeState(PlayerStateEnum.Sliding);
+        }
     }
 
     private void HandleOnJumpEvent()
     {
-        if(_player.MovementCompo.IsGround)
+        if (_player.MovementCompo.IsGround)
         {
             _stateMachine.ChangeState(PlayerStateEnum.JumpingUp);
         }
@@ -26,6 +35,7 @@ public abstract class PlayerGroundState : PlayerState
     public override void Exit()
     {
         _player.PlayerInput.OnJumpEvent -= HandleOnJumpEvent;
+        _player.PlayerInput.OnCrouchDownEvent -= HandleOnCrouchDownEvent;
         _player.MovementCompo.StopImmediately();
         base.Exit();
     }

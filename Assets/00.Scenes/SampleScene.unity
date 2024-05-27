@@ -2266,6 +2266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravity: -1
   _velocity: {x: 0, y: 0, z: 0}
+  _visualCamTrm: {fileID: 1440847582}
   _playerMainCam: {fileID: 1030080115}
   _sensivityX: 15
   _sensivityY: 7

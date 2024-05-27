@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Properties;
 using UnityEngine;
 
@@ -11,15 +12,18 @@ public enum PlayerStateEnum
     Run,
     JumpingUp,
     Fall,
-    Land,
     Attack,
-    SideRun
+    SideRun,
+    Sliding
 }
 public class Player : Agent
 {
     [Header("Setting Values")]
-    public float moveSpeed = 10f;
-    public float jumpPower = 6f;
+    public float moveSpeed = 13f;
+    public float jumpPower = 0.5f;
+
+    [HideInInspector]
+    public float defaultMoveSpeed, defaultJumpPower;
 
     [SerializeField]
     private InputReader _playerInput;
@@ -32,6 +36,9 @@ public class Player : Agent
     protected override void Awake()
     {
         base.Awake();
+
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpPower = jumpPower;
 
         MovementCompo = GetComponent<PlayerMovement>();
 
