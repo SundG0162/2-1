@@ -14,6 +14,15 @@ public abstract class PlayerGroundState : PlayerState
         base.Enter();
         _player.PlayerInput.OnJumpEvent += HandleOnJumpEvent;
         _player.PlayerInput.OnCrouchDownEvent += HandleOnCrouchDownEvent;
+        _player.PlayerInput.OnAttackEvent += HandleOnAttackEvent;
+    }
+
+    private void HandleOnAttackEvent()
+    {
+        if (_player.MovementCompo.IsGround)
+        {
+            _stateMachine.ChangeState(PlayerStateEnum.Attack);
+        }
     }
 
     private void HandleOnCrouchDownEvent()
@@ -36,6 +45,7 @@ public abstract class PlayerGroundState : PlayerState
     {
         _player.PlayerInput.OnJumpEvent -= HandleOnJumpEvent;
         _player.PlayerInput.OnCrouchDownEvent -= HandleOnCrouchDownEvent;
+        _player.PlayerInput.OnAttackEvent -= HandleOnAttackEvent;
         _player.MovementCompo.StopImmediately();
         base.Exit();
     }

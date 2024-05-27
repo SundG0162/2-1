@@ -34,6 +34,7 @@ public abstract class AgentMovement : MonoBehaviour
 
     public virtual void StopImmediately(bool withYAxis = false)
     {
+        SetMovement(Vector3.zero);
         if (withYAxis)
             _velocity = Vector3.zero;
         else

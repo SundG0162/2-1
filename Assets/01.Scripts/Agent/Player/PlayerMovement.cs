@@ -21,7 +21,7 @@ public class PlayerMovement : AgentMovement
     private bool _lockRotateXAxis = false;
     private float _xRotation = 0;
     private Vector2 _cameraRotDelta;
-    private Vector3 _slidingDirection;
+    private Vector3 _facingDirection;
 
     private Vector3 _movement;
 
@@ -69,11 +69,11 @@ public class PlayerMovement : AgentMovement
             right.y = 0;
             Vector3 velocity = forward * _movement.z + right * _movement.x;
             velocity.y = _velocity.y;
-            _slidingDirection = velocity;
+            _facingDirection = velocity;
             return velocity;
         }
         else
-            return _slidingDirection;
+            return _facingDirection;
         
     }
 

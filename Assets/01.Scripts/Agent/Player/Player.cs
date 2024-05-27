@@ -14,7 +14,8 @@ public enum PlayerStateEnum
     Fall,
     Attack,
     SideRun,
-    Sliding
+    Sliding,
+    JumpAttack
 }
 public class Player : Agent
 {
@@ -32,6 +33,7 @@ public class Player : Agent
     public PlayerMovement MovementCompo { get; private set; }
 
     private PlayerStateMachine _stateMachine;
+    public PlayerStateMachine StateMachine => _stateMachine;
 
     protected override void Awake()
     {
