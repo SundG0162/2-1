@@ -14,7 +14,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnCrouchDownEvent;
     public event Action OnCrouchUpEvent;
     public event Action OnAttackEvent;
-    public Vector2 MoveInput {  get; private set; }
+    public Vector2 MoveInput { get; private set; }
 
     private Controls _controls;
 
@@ -22,7 +22,7 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     private void OnEnable()
     {
-        if(_controls == null)
+        if (_controls == null)
         {
             _controls = new Controls();
             _controls.Player.SetCallbacks(this);
@@ -32,7 +32,8 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        OnAttackEvent?.Invoke();
+        if (context.performed)
+            OnAttackEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
@@ -45,7 +46,8 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        OnJumpEvent?.Invoke();
+        if (context.performed)
+            OnJumpEvent?.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
