@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMovement : AgentMovement
 {
@@ -86,12 +87,13 @@ public class PlayerMovement : AgentMovement
     {
         if(active)
         {
+            Debug.Log("¿À¤Â");
             _playerMainCam.SetParent(_visualCamTrm);
         }
         else
         {
             _playerMainCam.SetParent(_player.transform);
-            _playerMainCam.localPosition = _defaultMainCamLocalPos;
+            _playerMainCam.DOLocalMove(_defaultMainCamLocalPos, 0.2f);
         }
     }
 

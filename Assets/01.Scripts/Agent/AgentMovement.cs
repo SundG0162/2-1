@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class AgentMovement : MonoBehaviour
@@ -34,13 +35,15 @@ public abstract class AgentMovement : MonoBehaviour
 
     public virtual void StopImmediately(bool withYAxis = false)
     {
-        SetMovement(Vector3.zero);
         if (withYAxis)
+        {
             _velocity = Vector3.zero;
+        }
         else
         {
             _velocity = new Vector3(0, _velocity.y, 0);
         }
+        SetMovement(Vector3.zero);
     }
 
     protected virtual void FixedUpdate()

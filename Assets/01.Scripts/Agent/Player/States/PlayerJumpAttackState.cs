@@ -28,6 +28,7 @@ public class PlayerJumpAttackState : PlayerState
     public override void Exit()
     {
         _player.MovementCompo.ModifyFollowHeadCam(false);
+        _player.MovementCompo.StopImmediately();
         base.Exit();
     }
 }
