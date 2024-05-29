@@ -11,7 +11,7 @@ public class PlayerJumpingUpState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
-        _player.MovementCompo.SetVelocity(_player.MovementCompo.Velocity + new Vector3(0, _player.jumpPower, 0));
+        _player.MovementCompo.SetYVelocity(_player.jumpPower);
     }
 
     public override void UpdateState()

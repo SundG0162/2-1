@@ -72,30 +72,19 @@ public class PlayerMovement : AgentMovement
 
     public Vector3 GetRotateVelocity()
     {
-        if (_canRotateVelocity)
-        {
-            Vector3 forward = transform.forward;
-            forward.y = 0;
-            Vector3 right = transform.right;
-            right.y = 0;
-            Vector3 velocity = forward * _movement.z + right * _movement.x;
-            velocity.y = _velocity.y;
-            _facingDirection = velocity;
-            return velocity;
-        }
-        else
-            return _facingDirection;
-
+        Vector3 forward = transform.forward;
+        forward.y = 0;
+        Vector3 right = transform.right;
+        right.y = 0;
+        Vector3 velocity = forward * _movement.z + right * _movement.x;
+        velocity.y = _velocity.y;
+        _facingDirection = velocity;
+        return velocity;
     }
 
     public void ModifyForwardMovement(bool active)
     {
         _forwardMovement = active;
-    }
-
-    public void ModifyRotateVelocity(bool active)
-    {
-        _canRotateVelocity = active;
     }
 
     public void ModifyFollowHeadCam(bool active)

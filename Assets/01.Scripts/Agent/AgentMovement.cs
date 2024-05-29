@@ -27,10 +27,9 @@ public abstract class AgentMovement : MonoBehaviour
     }
 
     public abstract void SetMovement(Vector3 movement);
-    public void SetVelocity(Vector3 velocity)
+    public void SetYVelocity(float yVelocity)
     {
-        _velocity = velocity;
-        _verticalVelocity = velocity.y;
+        _verticalVelocity = yVelocity;
     }
 
     public virtual void StopImmediately(bool withYAxis = false)

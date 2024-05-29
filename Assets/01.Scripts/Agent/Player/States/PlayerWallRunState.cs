@@ -34,10 +34,11 @@ public class PlayerWallRunState : PlayerState
 
     private void HandleOnJumpEvent()
     {
-        float wallJumpForce = 0.5f;
-        Vector3 wallJumpDir = _wallNormalVec;
+        Vector3 wallJumpDir = _wallNormalVec + _player.transform.up;
         Debug.Log(wallJumpDir);
-        _player.MovementCompo.SetVelocity(wallJumpDir * wallJumpForce);
+        float wallJumpForce = 0.35f;
+        _player.MovementCompo.SetYVelocity(wallJumpDir.y * wallJumpForce);
+        _player.MovementCompo.SetMovement(wallJumpDir * 50);
         _stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 
@@ -50,7 +51,7 @@ public class PlayerWallRunState : PlayerState
         {
             _wallNormalVec = hit.normal;
             Vector3 velocity = _player.MovementCompo.Velocity;
-            _player.MovementCompo.SetVelocity(new Vector3(velocity.x, velocity.y * 0.3f, velocity.z));
+            _player.MovementCompo.SetYVelocity(velocity.y * 0.3f);
             Vector3 forward = Vector3.Cross(_wallNormalVec, _player.transform.up);
             if (Vector3.Dot(_player.transform.forward, forward) < 0)
             {
