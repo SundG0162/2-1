@@ -11,15 +11,22 @@ public class PlayerMovement : AgentMovement
     [SerializeField]
     private Transform _playerMainCam;
     [SerializeField]
-    private float _sensivityX = 8f;
+    private float _sensivityX = 8f, _sensivityY = 4f;
     [SerializeField]
-    private float _sensivityY = 4f;
+    private float _upperLookLimit = -70.0f, _lowerLookLimit = 70.0f;
+
+    [Header("Wall Check Settings")]
+    [SerializeField]
+    private Transform _wallCheckerTrm;
+    [SerializeField]
+    private LayerMask _whatIsWall;
+
     private Vector3 _defaultMainCamLocalPos;
 
-    [SerializeField] private float _upperLookLimit = -70.0f, _lowerLookLimit = 70.0f;
 
     private bool _canRotateVelocity = true;
     private bool _lockRotateXAxis = false;
+    private bool _forwardMovement = true;
     private float _xRotation = 0;
     private Vector2 _cameraRotDelta;
     private Vector3 _facingDirection;
@@ -46,7 +53,10 @@ public class PlayerMovement : AgentMovement
 
     protected override void FixedUpdate()
     {
-        _velocity = GetRotateVelocity() * _player.moveSpeed;
+        if (_forwardMovement)
+            _velocity = GetRotateVelocity() * _player.moveSpeed;
+        else
+            _velocity = _movement * _player.moveSpeed;
         base.FixedUpdate();
     }
 
@@ -75,7 +85,12 @@ public class PlayerMovement : AgentMovement
         }
         else
             return _facingDirection;
-        
+
+    }
+
+    public void ModifyForwardMovement(bool active)
+    {
+        _forwardMovement = active;
     }
 
     public void ModifyRotateVelocity(bool active)
@@ -85,9 +100,8 @@ public class PlayerMovement : AgentMovement
 
     public void ModifyFollowHeadCam(bool active)
     {
-        if(active)
+        if (active)
         {
-            Debug.Log("¿À¤Â");
             _playerMainCam.SetParent(_visualCamTrm);
         }
         else
@@ -95,6 +109,17 @@ public class PlayerMovement : AgentMovement
             _playerMainCam.SetParent(_player.transform);
             _playerMainCam.DOLocalMove(_defaultMainCamLocalPos, 0.2f);
         }
+    }
+
+    public bool CheckWall(out RaycastHit wallHitInfo)
+    {
+        RaycastHit rightHit;
+        RaycastHit leftHit;
+        float wallCheckDistance = 0.7f;
+        bool wallRight = Physics.Raycast(new Ray(_wallCheckerTrm.position, transform.right), out rightHit, wallCheckDistance, _whatIsWall);
+        bool wallLeft = Physics.Raycast(new Ray(_wallCheckerTrm.position, -transform.right), out leftHit, wallCheckDistance, _whatIsWall);
+        wallHitInfo = wallRight ? rightHit : leftHit;
+        return wallRight || wallLeft;
     }
 
     private void CameraRotate()

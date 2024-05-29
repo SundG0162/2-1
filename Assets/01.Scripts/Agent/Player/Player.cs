@@ -15,7 +15,8 @@ public enum PlayerStateEnum
     Attack,
     SideRun,
     Sliding,
-    JumpAttack
+    JumpAttack,
+    WallRun
 }
 public class Player : Agent
 {

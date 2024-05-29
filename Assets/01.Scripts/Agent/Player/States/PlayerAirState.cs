@@ -41,5 +41,9 @@ public abstract class PlayerAirState : PlayerState
     {
         base.UpdateState();
         _player.MovementCompo.SetMovement(_movementDirection);
+        if(_player.MovementCompo.CheckWall(out RaycastHit hit))
+        {
+            _stateMachine.ChangeState(PlayerStateEnum.WallRun);
+        }
     }
 }
