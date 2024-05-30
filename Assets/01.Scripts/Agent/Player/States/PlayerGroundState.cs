@@ -46,7 +46,6 @@ public abstract class PlayerGroundState : PlayerState
         _player.PlayerInput.OnJumpEvent -= HandleOnJumpEvent;
         _player.PlayerInput.OnCrouchDownEvent -= HandleOnCrouchDownEvent;
         _player.PlayerInput.OnAttackEvent -= HandleOnAttackEvent;
-        _player.MovementCompo.StopImmediately();
         base.Exit();
     }
 

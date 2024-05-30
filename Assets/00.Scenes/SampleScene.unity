@@ -1703,7 +1703,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.61
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1723,6 +1723,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 13
   jumpPower: 0.3
+  crouchMoveSpeed: 6
+  slidingSpeed: 30
+  wallJumpPower: 0.32
   defaultMoveSpeed: 0
   defaultJumpPower: 0
   _playerInput: {fileID: 11400000, guid: 836a4721d69f06047b0475d69772cf2b, type: 2}
@@ -3871,7 +3874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4407206784830325596
 GameObject:
   m_ObjectHideFlags: 0

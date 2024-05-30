@@ -21,7 +21,8 @@ public class PlayerMovement : AgentMovement
     [SerializeField]
     private LayerMask _whatIsWall;
 
-    private Vector3 _defaultMainCamLocalPos;
+    [HideInInspector]
+    public Vector3 defaultMainCamLocalPos;
 
 
     private bool _canRotateVelocity = true;
@@ -36,7 +37,7 @@ public class PlayerMovement : AgentMovement
     private void Start()
     {
         _player = GetComponent<Player>();
-        _defaultMainCamLocalPos = _playerMainCam.localPosition;
+        defaultMainCamLocalPos = _playerMainCam.localPosition;
     }
 
     public void ModifyLockCameraXAxisRotate(bool active)
@@ -87,6 +88,14 @@ public class PlayerMovement : AgentMovement
         _forwardMovement = active;
     }
 
+    private Tween _moveCamTween = null;
+    public void LocalMoveMainCam(Vector3 pos, float duration, Ease ease = Ease.OutSine)
+    {
+        if (_moveCamTween != null && _moveCamTween.IsActive()) 
+            _moveCamTween.Kill();
+        _moveCamTween = _playerMainCam.DOLocalMove(pos, duration).SetEase(ease);
+    }
+
     public void ModifyFollowHeadCam(bool active)
     {
         if (active)
@@ -96,7 +105,7 @@ public class PlayerMovement : AgentMovement
         else
         {
             _playerMainCam.SetParent(_player.transform);
-            _playerMainCam.DOLocalMove(_defaultMainCamLocalPos, 0.2f);
+            _playerMainCam.DOLocalMove(defaultMainCamLocalPos, 0.2f);
         }
     }
 

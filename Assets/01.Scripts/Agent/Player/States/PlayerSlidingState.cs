@@ -12,11 +12,18 @@ public class PlayerSlidingState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        _player.moveSpeed += 10f;
+        float moveSpeedThreshold = 0.031f;
+        _player.moveSpeed = _player.slidingSpeed;
         _player.MovementCompo.ModifyLockCameraXAxisRotate(true);
-        _player.MovementCompo.ModifyFollowHeadCam(true);
+        _player.MovementCompo.LocalMoveMainCam(Vector3.up * 0.4f, 0.3f);
         _player.MovementCompo.ModifyForwardMovement(false);
         _player.PlayerInput.OnCrouchUpEvent += HandleOnCrouchUpEvent;
+        Debug.Log("Velocity : " + _player.MovementCompo.Velocity);
+        Debug.Log("Magnitude : " + _player.MovementCompo.Velocity.magnitude);
+        if (_player.MovementCompo.Velocity.magnitude < moveSpeedThreshold)
+        {
+            _stateMachine.ChangeState(PlayerStateEnum.Crouch);
+        }
     }
 
     private void HandleOnCrouchUpEvent()
@@ -38,7 +45,7 @@ public class PlayerSlidingState : PlayerGroundState
     public override void Exit()
     {
         _player.MovementCompo.ModifyLockCameraXAxisRotate(false);
-        _player.MovementCompo.ModifyFollowHeadCam(false);
+        _player.MovementCompo.LocalMoveMainCam(_player.MovementCompo.defaultMainCamLocalPos, 0.3f);
         _player.MovementCompo.ModifyForwardMovement(true);
         _player.PlayerInput.OnCrouchUpEvent -= HandleOnCrouchUpEvent;
         _player.moveSpeed = _player.defaultMoveSpeed;

@@ -8,7 +8,7 @@ public class PlayerWallRunState : PlayerState
 {
     private Vector3 _wallNormalVec;
     private float _lastWallRunTime = 0;
-    private float _lastWallRunThreshold = 0.3f;
+    private float _lastWallRunThreshold = 0.35f;
     public PlayerWallRunState(PlayerStateMachine stateMachine, Player player, string animBoolname) : base(stateMachine, player, animBoolname)
     {
     }
@@ -35,10 +35,8 @@ public class PlayerWallRunState : PlayerState
     private void HandleOnJumpEvent()
     {
         Vector3 wallJumpDir = _wallNormalVec + _player.transform.up;
-        Debug.Log(wallJumpDir);
-        float wallJumpForce = 0.35f;
-        _player.MovementCompo.SetYVelocity(wallJumpDir.y * wallJumpForce);
-        _player.MovementCompo.SetMovement(wallJumpDir * 50);
+        _player.MovementCompo.SetYVelocity(wallJumpDir.y * _player.wallJumpPower);
+        _player.MovementCompo.SetMovement(_player.MovementCompo.Velocity * Time.fixedDeltaTime);
         _stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 

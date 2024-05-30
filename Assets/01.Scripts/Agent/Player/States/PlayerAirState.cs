@@ -14,7 +14,6 @@ public abstract class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
         _player.PlayerInput.OnMoveEvent += HandleOnMoveEvent;
         _player.PlayerInput.OnAttackEvent += HandleOnAttackEvent;
         HandleOnMoveEvent(_player.PlayerInput.MoveInput);
