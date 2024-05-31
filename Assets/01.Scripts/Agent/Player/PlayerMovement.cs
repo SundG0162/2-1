@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : AgentMovement
 {
@@ -44,7 +43,7 @@ public class PlayerMovement : AgentMovement
         _lockRotateXAxis = active;
     }
 
-    public void SetCameraRotate(Vector2 delta)
+    public void SetPlayerRotate(Vector2 delta)
     {
         _cameraRotDelta.x = delta.y * _sensivityX * Time.deltaTime;
         float rotateY = delta.x * _sensivityY * Time.deltaTime;
@@ -129,7 +128,7 @@ public class PlayerMovement : AgentMovement
 
     private void CameraRotate()
     {
-        SetCameraRotate(_player.PlayerInput.CamDelta);
+        SetPlayerRotate(_player.PlayerInput.CamDelta);
         if (_lockRotateXAxis) return;
         _xRotation -= _cameraRotDelta.x;
 

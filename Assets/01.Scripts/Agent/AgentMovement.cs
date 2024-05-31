@@ -6,17 +6,6 @@ using UnityEngine;
 
 public abstract class AgentMovement : MonoBehaviour
 {
-
-    public async void InputAsync()
-    {
-        InputS();
-        await Task.Delay(1);
-    }
-
-    public void InputS()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape)) { }
-    }
     [SerializeField]
     private float _gravity = -9.8f;
 
@@ -91,9 +80,5 @@ public abstract class AgentMovement : MonoBehaviour
     protected virtual void Move()
     {
         _characterController.Move(_velocity);
-        if (_velocity.magnitude > 0.1f)
-        {
-            //_targetRotation = Quaternion.LookRotation(_velocity);
-        }
     }
 }

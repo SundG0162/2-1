@@ -27,5 +27,6 @@ public class PlayerGun : MonoBehaviour
 
     private void HandleOnAttackEvent()
     {
+
     }
 }

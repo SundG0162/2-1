@@ -15,10 +15,10 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnCrouchUpEvent;
     public event Action OnAttackEvent;
     public Vector2 MoveInput { get; private set; }
+    public Vector2 CamDelta { get; private set; }
 
     private Controls _controls;
 
-    public Vector2 CamDelta { get; private set; }
 
     private void OnEnable()
     {

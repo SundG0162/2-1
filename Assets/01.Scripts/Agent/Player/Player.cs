@@ -21,7 +21,7 @@ public enum PlayerStateEnum
 }
 public class Player : Agent
 {
-    [Header("Setting Values")]
+    [Header("Setting Values")]  
     public float moveSpeed = 13f;
     public float jumpPower = 0.3f;
     public float crouchMoveSpeed = 6f;

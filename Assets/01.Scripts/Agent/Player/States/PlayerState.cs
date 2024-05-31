@@ -5,7 +5,7 @@ public abstract class PlayerState
     protected PlayerStateMachine _stateMachine;
     protected Player _player;
 
-    protected int _animBoolHash;
+    protected readonly int _animBoolHash;
     protected bool _endTriggerCalled;
 
     public PlayerState(PlayerStateMachine stateMachine, Player player, string animBoolname)
