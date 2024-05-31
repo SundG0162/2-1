@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerMovement : AgentMovement
 {
@@ -25,12 +26,10 @@ public class PlayerMovement : AgentMovement
     public Vector3 defaultMainCamLocalPos;
 
 
-    private bool _canRotateVelocity = true;
     private bool _lockRotateXAxis = false;
     private bool _forwardMovement = true;
     private float _xRotation = 0;
     private Vector2 _cameraRotDelta;
-    private Vector3 _facingDirection;
 
     private Vector3 _movement;
 
@@ -79,7 +78,6 @@ public class PlayerMovement : AgentMovement
         right.y = 0;
         Vector3 velocity = forward * _movement.z + right * _movement.x;
         velocity.y = _velocity.y;
-        _facingDirection = velocity;
         return velocity;
     }
 
@@ -96,6 +94,14 @@ public class PlayerMovement : AgentMovement
         _moveCamTween = _playerMainCam.DOLocalMove(pos, duration).SetEase(ease);
     }
 
+    private Tween _tiltCamTween = null;
+    public void TileMainCam(float value, float duration)
+    {
+        if (_tiltCamTween != null && _tiltCamTween.IsActive())
+            _tiltCamTween.Kill();
+        _tiltCamTween = _playerMainCam.DOLocalRotate(new Vector3(0,0,value), duration);
+    }
+
     public void ModifyFollowHeadCam(bool active)
     {
         if (active)
@@ -109,7 +115,7 @@ public class PlayerMovement : AgentMovement
         }
     }
 
-    public bool CheckWall(out RaycastHit wallHitInfo)
+    public bool CheckWall(out RaycastHit wallHitInfo, out bool isLeft)
     {
         RaycastHit rightHit;
         RaycastHit leftHit;
@@ -117,6 +123,7 @@ public class PlayerMovement : AgentMovement
         bool wallRight = Physics.Raycast(new Ray(_wallCheckerTrm.position, transform.right), out rightHit, wallCheckDistance, _whatIsWall);
         bool wallLeft = Physics.Raycast(new Ray(_wallCheckerTrm.position, -transform.right), out leftHit, wallCheckDistance, _whatIsWall);
         wallHitInfo = wallRight ? rightHit : leftHit;
+        isLeft = wallLeft;
         return wallRight || wallLeft;
     }
 
@@ -127,6 +134,6 @@ public class PlayerMovement : AgentMovement
         _xRotation -= _cameraRotDelta.x;
 
         _xRotation = Mathf.Clamp(_xRotation, _upperLookLimit, _lowerLookLimit);
-        _playerMainCam.transform.localRotation = Quaternion.Euler(_xRotation, 0, 0);
+        _playerMainCam.transform.localRotation = Quaternion.Euler(_xRotation, 0, _playerMainCam.transform.localEulerAngles.z);
     }
 }

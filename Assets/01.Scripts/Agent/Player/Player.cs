@@ -12,12 +12,12 @@ public enum PlayerStateEnum
     Run,
     JumpingUp,
     Fall,
-    Attack,
     SideRun,
     Sliding,
     JumpAttack,
     WallRun,
-    Crouch
+    Crouch,
+    WallJump
 }
 public class Player : Agent
 {
@@ -27,6 +27,7 @@ public class Player : Agent
     public float crouchMoveSpeed = 6f;
     public float slidingSpeed = 30f;
     public float wallJumpPower = 0.32f;
+    public float wallRunSpeed = 16f;
 
     [HideInInspector]
     public float defaultMoveSpeed, defaultJumpPower;

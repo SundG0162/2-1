@@ -40,7 +40,7 @@ public abstract class PlayerAirState : PlayerState
     {
         base.UpdateState();
         _player.MovementCompo.SetMovement(_movementDirection);
-        if(_player.MovementCompo.CheckWall(out RaycastHit hit))
+        if(_player.MovementCompo.CheckWall(out RaycastHit hit, out bool isLeft))
         {
             _stateMachine.ChangeState(PlayerStateEnum.WallRun);
         }

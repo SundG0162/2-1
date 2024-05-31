@@ -21,7 +21,6 @@ public abstract class PlayerGroundState : PlayerState
     {
         if (_player.MovementCompo.IsGround)
         {
-            _stateMachine.ChangeState(PlayerStateEnum.Attack);
         }
     }
 

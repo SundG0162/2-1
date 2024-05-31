@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
 public abstract class AgentMovement : MonoBehaviour
 {
+
+    public async void InputAsync()
+    {
+        InputS();
+        await Task.Delay(1);
+    }
+
+    public void InputS()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)) { }
+    }
     [SerializeField]
     private float _gravity = -9.8f;
 
@@ -27,6 +39,11 @@ public abstract class AgentMovement : MonoBehaviour
     }
 
     public abstract void SetMovement(Vector3 movement);
+    public void SetVelocity(Vector3 velocity)
+    {
+        _velocity = velocity;
+        _verticalVelocity = velocity.y;
+    }
     public void SetYVelocity(float yVelocity)
     {
         _verticalVelocity = yVelocity;
@@ -34,7 +51,6 @@ public abstract class AgentMovement : MonoBehaviour
 
     public virtual void StopImmediately(bool withYAxis = false)
     {
-        Debug.Log("WTF");
         if (withYAxis)
         {
             _velocity = Vector3.zero;

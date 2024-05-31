@@ -8,7 +8,7 @@ public class PlayerWallRunState : PlayerState
 {
     private Vector3 _wallNormalVec;
     private float _lastWallRunTime = 0;
-    private float _lastWallRunThreshold = 0.35f;
+    private float _lastWallRunThreshold = 0.3f;
     public PlayerWallRunState(PlayerStateMachine stateMachine, Player player, string animBoolname) : base(stateMachine, player, animBoolname)
     {
     }
@@ -16,28 +16,45 @@ public class PlayerWallRunState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        _player.PlayerInput.OnJumpEvent += HandleOnJumpEvent;
-        _player.MovementCompo.ModifyForwardMovement(false);
         if (_lastWallRunTime + _lastWallRunThreshold > Time.time)
         {
             _stateMachine.ChangeState(PlayerStateEnum.Idle);
+            return;
         }
+        if (_player.MovementCompo.CheckWall(out RaycastHit hit, out bool isLeft))
+        {
+            _wallNormalVec = hit.normal;
+        }
+        _player.PlayerInput.OnJumpEvent += HandleOnJumpEvent;
+        _player.MovementCompo.ModifyForwardMovement(false);
+        if(isLeft)
+        {
+            _player.MovementCompo.TileMainCam(-20, 0.3f);
+        }
+        else
+        {
+            _player.MovementCompo.TileMainCam(20, 0.3f);
+        }
+
     }
 
     public override void Exit()
     {
         _player.PlayerInput.OnJumpEvent -= HandleOnJumpEvent;
         _player.MovementCompo.ModifyForwardMovement(true);
+        _player.MovementCompo.TileMainCam(0, 0.3f);
         _lastWallRunTime = Time.time;
         base.Exit();
     }
 
     private void HandleOnJumpEvent()
     {
+        _player.MovementCompo.StopImmediately(true);
         Vector3 wallJumpDir = _wallNormalVec + _player.transform.up;
+        _player.MovementCompo.SetVelocity(wallJumpDir * 30 * Time.fixedDeltaTime);
+        _player.MovementCompo.SetMovement(wallJumpDir * 30 * Time.fixedDeltaTime);
         _player.MovementCompo.SetYVelocity(wallJumpDir.y * _player.wallJumpPower);
-        _player.MovementCompo.SetMovement(_player.MovementCompo.Velocity * Time.fixedDeltaTime);
-        _stateMachine.ChangeState(PlayerStateEnum.Idle);
+        _stateMachine.ChangeState(PlayerStateEnum.WallJump);
     }
 
     public override void UpdateState()
@@ -45,7 +62,7 @@ public class PlayerWallRunState : PlayerState
         base.UpdateState();
         if (_player.MovementCompo.IsGround)
             _stateMachine.ChangeState(PlayerStateEnum.Idle);
-        if(_player.MovementCompo.CheckWall(out RaycastHit hit))
+        if (_player.MovementCompo.CheckWall(out RaycastHit hit, out bool isLeft))
         {
             _wallNormalVec = hit.normal;
             Vector3 velocity = _player.MovementCompo.Velocity;
