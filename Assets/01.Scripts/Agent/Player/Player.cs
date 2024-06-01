@@ -14,7 +14,6 @@ public enum PlayerStateEnum
     Fall,
     SideRun,
     Sliding,
-    JumpAttack,
     WallRun,
     Crouch,
     WallJump

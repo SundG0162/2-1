@@ -15,15 +15,8 @@ public abstract class PlayerAirState : PlayerState
     {
         base.Enter();
         _player.PlayerInput.OnMoveEvent += HandleOnMoveEvent;
-        _player.PlayerInput.OnAttackEvent += HandleOnAttackEvent;
         HandleOnMoveEvent(_player.PlayerInput.MoveInput);
     }
-
-    private void HandleOnAttackEvent()
-    {
-        _stateMachine.ChangeState(PlayerStateEnum.JumpAttack);
-    }
-
     private void HandleOnMoveEvent(Vector2 movement)
     {
         _movementDirection = new Vector3(movement.x, 0, movement.y);
@@ -32,7 +25,6 @@ public abstract class PlayerAirState : PlayerState
     public override void Exit()
     {
         _player.PlayerInput.OnMoveEvent -= HandleOnMoveEvent;
-        _player.PlayerInput.OnAttackEvent -= HandleOnAttackEvent;
         base.Exit();
     }
 
