@@ -43,6 +43,11 @@ public class PlayerGun : MonoBehaviour
         BulletTrail trail = PoolManager.Instance.Pop(PoolingType.VFX_BulletTrail) as BulletTrail;
 
         trail.DrawTrail(_firePos.position, _visualCam.transform.forward * _visualCam.farClipPlane, 0.03f);
+
+        if(hit.collider.TryGetComponent(out Health health))
+        {
+            health.GetDamage();
+        }
     }
 
 }
