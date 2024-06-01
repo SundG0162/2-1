@@ -22,6 +22,13 @@ public class PlayerGun : MonoBehaviour
     [SerializeField]
     private LayerMask _whatIsObstacle;
 
+    [Header("Gun Setting")]
+    [SerializeField]
+    private float _fireDelay;
+
+    private float _lastAttackTime = 0;
+
+    private Coroutine _fireCoroutine;
 
     [Header("Recoil Setting")]
     [SerializeField]
@@ -37,8 +44,6 @@ public class PlayerGun : MonoBehaviour
     private Vector3 _targetRot;
     
 
-    
-
 
     private void Awake()
     {
@@ -48,15 +53,41 @@ public class PlayerGun : MonoBehaviour
 
     private void Start()
     {
-        _player.PlayerInput.OnAttackEvent += HandleOnAttackEvent;
+        _player.PlayerInput.OnAttackStartEvent += HandleOnAttackStartEvent;
+        _player.PlayerInput.OnAttackEndEvent += HandleOnAttackEndEvent;
     }
 
     private void OnDestroy()
     {
-        _player.PlayerInput.OnAttackEvent -= HandleOnAttackEvent;
+        _player.PlayerInput.OnAttackStartEvent -= HandleOnAttackStartEvent;
+        _player.PlayerInput.OnAttackEndEvent -= HandleOnAttackEndEvent;
     }
 
-    private void HandleOnAttackEvent()
+    private void HandleOnAttackStartEvent()
+    {
+        Debug.Log("클릭 시작");
+        _fireCoroutine = StartCoroutine(FireCoroutine());
+    }
+
+    private void HandleOnAttackEndEvent()
+    {
+        Debug.Log("클릭 끝");
+        StopCoroutine(_fireCoroutine);
+        _lastAttackTime = Time.time;
+    }
+
+    private IEnumerator FireCoroutine()
+    {
+        yield return new WaitUntil(() => _lastAttackTime + _fireDelay < Time.time);
+        var ws = new WaitForSeconds(_fireDelay);
+        while (true)
+        {
+            Fire();
+            yield return ws;
+        }
+    }
+
+    private void Fire()
     {
         RaycastHit hit;
         Recoil();
@@ -65,7 +96,7 @@ public class PlayerGun : MonoBehaviour
 
         trail.DrawTrail(_firePos.position, _visualCam.transform.forward * _visualCam.farClipPlane, 0.03f);
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             if (hit.collider.TryGetComponent(out Health health))
             {
@@ -84,7 +115,7 @@ public class PlayerGun : MonoBehaviour
 
     private void Recoil()
     {
-        _targetRot = new Vector3(_recoilX, Random.Range(-_recoilY, _recoilY), Random.Range(-_recoilZ, _recoilZ));
+        _targetRot += new Vector3(_recoilX, Random.Range(-_recoilY, _recoilY), Random.Range(-_recoilZ, _recoilZ));
     }
 
 }

@@ -9,11 +9,11 @@ using static Controls;
 public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action<Vector2> OnMoveEvent;
-    public event Action<Vector2> OnCameraRotateEvent;
     public event Action OnJumpEvent;
     public event Action OnCrouchDownEvent;
     public event Action OnCrouchUpEvent;
-    public event Action OnAttackEvent;
+    public event Action OnAttackStartEvent;
+    public event Action OnAttackEndEvent;
     public Vector2 MoveInput { get; private set; }
     public Vector2 CamDelta { get; private set; }
 
@@ -33,7 +33,9 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnAttackEvent?.Invoke();
+            OnAttackStartEvent?.Invoke();
+        if (context.canceled)
+            OnAttackEndEvent?.Invoke();
     }
 
     public void OnCrouch(InputAction.CallbackContext context)
