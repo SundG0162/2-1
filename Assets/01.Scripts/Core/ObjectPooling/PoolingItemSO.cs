@@ -18,7 +18,6 @@ namespace ObjectPooling
                 if(enumName != prefab.type.ToString())
                 {
                     prefab = null;
-                    Debug.LogError("À¸¾Ç½Ã¹ß");
                 }
             }
         }

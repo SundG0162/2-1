@@ -19,7 +19,7 @@ public abstract class AgentMovement : MonoBehaviour
     private float _verticalVelocity;
     protected Quaternion _targetRotation;
 
-    public bool IsGround => _characterController.isGrounded;
+    public bool IsGround { get; protected set; }
 
     public void Awake()
     {

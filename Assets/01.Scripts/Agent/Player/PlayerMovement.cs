@@ -32,6 +32,7 @@ public class PlayerMovement : AgentMovement
 
     private Vector3 _movement;
 
+
     private void Start()
     {
         _player = GetComponent<Player>();
@@ -52,6 +53,7 @@ public class PlayerMovement : AgentMovement
 
     protected override void FixedUpdate()
     {
+        IsGround = _characterController.isGrounded;
         if (_forwardMovement)
             _velocity = GetRotateVelocity() * _player.moveSpeed;
         else

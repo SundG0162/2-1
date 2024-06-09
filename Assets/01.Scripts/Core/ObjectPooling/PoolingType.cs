@@ -3,6 +3,6 @@ namespace ObjectPooling
 {
     public enum PoolingType
     {
-        VFX_BulletTrail, 
+        VFX_BulletTrail, Combat_Bullet, 
     }
 }

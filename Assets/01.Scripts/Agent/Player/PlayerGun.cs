@@ -6,13 +6,12 @@ using ObjectPooling;
 using Random = UnityEngine.Random;
 using UnityEditorInternal;
 
-public class PlayerGun : MonoBehaviour
+public class PlayerGun : AgentGun
 {
     private Player _player;
 
     [SerializeField]
     private Transform _gunTrm;
-    private Transform _firePos;
 
     [SerializeField]
     Camera _visualCam;
@@ -48,7 +47,7 @@ public class PlayerGun : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _firePos = _gunTrm.Find("FirePos");
+        _firePosTrm = _gunTrm.Find("FirePos");
     }
 
     private void Start()
@@ -65,13 +64,11 @@ public class PlayerGun : MonoBehaviour
 
     private void HandleOnAttackStartEvent()
     {
-        Debug.Log("클릭 시작");
         _fireCoroutine = StartCoroutine(FireCoroutine());
     }
 
     private void HandleOnAttackEndEvent()
     {
-        Debug.Log("클릭 끝");
         StopCoroutine(_fireCoroutine);
         _lastAttackTime = Time.time;
     }
@@ -82,25 +79,25 @@ public class PlayerGun : MonoBehaviour
         var ws = new WaitForSeconds(_fireDelay);
         while (true)
         {
-            Fire();
+            Fire(Vector3.zero);
             yield return ws;
         }
     }
 
-    private void Fire()
+    public override void Fire(Vector3 dir)
     {
         RaycastHit hit;
         Recoil();
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Camera.main.farClipPlane, _whatIsObstacle | _whatIsEnemy);
         BulletTrail trail = PoolManager.Instance.Pop(PoolingType.VFX_BulletTrail) as BulletTrail;
 
-        trail.DrawTrail(_firePos.position, _visualCam.transform.forward * _visualCam.farClipPlane, 0.03f);
+        trail.DrawTrail(_firePosTrm.position, _visualCam.transform.forward * _visualCam.farClipPlane, 0.03f);
 
         if (hit.collider != null)
         {
-            if (hit.collider.TryGetComponent(out Health health))
+            if (hit.collider.TryGetComponent(out EnemyHealth health))
             {
-                health.GetDamage();
+                health.ApplyDamage(10, hit.point, hit.normal, 1f);
             }
         }
     }
