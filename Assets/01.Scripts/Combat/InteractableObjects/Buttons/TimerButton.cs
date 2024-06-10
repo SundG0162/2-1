@@ -2,32 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerButton : InteractableObject
+public class TimerButton : InteractableObject, IInteractableButton
 {
     [SerializeField]
     private float _closeTime = 2f;
     private float _closeTimer = 0;
-    private bool _isActive = false;
 
     [SerializeField]
     private Door _door;
 
+    public bool IsActive { get; set; } = false;
+
     protected override void Interact()
     {
-        _isActive = true;
+        IsActive = true;
         _closeTimer = 0;
         _door.ModifyOpenStatus(true);
     }
 
     private void Update()
     {
-        if (_isActive)
+        if (IsActive)
         {
             _closeTimer += Time.deltaTime;
 
             if(_closeTimer > _closeTime)
             {
-                _isActive = false;
+                IsActive = false;
                 _door.ModifyOpenStatus(false);
             }
         }
