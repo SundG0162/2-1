@@ -95,7 +95,7 @@ public class PlayerGun : AgentGun
 
         if (hit.collider != null)
         {
-            if (hit.collider.TryGetComponent(out EnemyHealth health))
+            if (hit.collider.TryGetComponent(out IDamageable health))
             {
                 health.ApplyDamage(10, hit.point, hit.normal, 1f);
             }
