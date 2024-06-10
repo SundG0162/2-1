@@ -11,10 +11,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     private Enemy _owner;
     public Enemy Owner => _owner;
     private int _currentHealth;
+    [SerializeField]
+    private int _maxHealth;
 
     public void Initialize(Agent agent)
     {
         _owner = agent as Enemy;
+        _currentHealth = _maxHealth;
     }
 
     public void ApplyDamage(int damage, Vector3 hitPoint, Vector3 normal, float knockBackPower)
