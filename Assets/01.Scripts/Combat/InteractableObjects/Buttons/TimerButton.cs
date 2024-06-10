@@ -29,7 +29,8 @@ public class TimerButton : InteractableObject, IInteractableButton
             if(_closeTimer > _closeTime)
             {
                 IsActive = false;
-                _door.ModifyOpenStatus(false);
+                if (_door != null)
+                    _door.ModifyOpenStatus(false);
             }
         }
     }

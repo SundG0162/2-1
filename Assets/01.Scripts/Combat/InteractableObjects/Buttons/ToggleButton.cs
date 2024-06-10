@@ -12,6 +12,7 @@ public class ToggleButton : InteractableObject, IInteractableButton
     protected override void Interact()
     {
         IsActive = !IsActive;
-        _door.ModifyOpenStatus(IsActive);
+        if (_door != null)
+            _door.ModifyOpenStatus(IsActive);
     }
 }
