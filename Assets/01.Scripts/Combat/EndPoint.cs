@@ -6,7 +6,8 @@ public class EndPoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Player player))
+        Debug.Log("???");
+        if (other.TryGetComponent(out Player player))
         {
             if (StageManager.Instance.CurrentStage.enemyList.Count <= 0)
             {

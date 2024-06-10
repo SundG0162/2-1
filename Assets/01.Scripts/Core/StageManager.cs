@@ -7,13 +7,11 @@ public class StageManager : MonoSingleton<StageManager>
     [SerializeField]
     private List<Stage> _stageList;
     private Stage _currentStage;
-    public Stage CurrentStage { get => _currentStage; }
+    public Stage CurrentStage => _currentStage;
     private int _currentStageIndex = 0;
 
     private void Awake()
     {
-        _stageList = new List<Stage>();
-
         Initialize();
     }
 
@@ -27,6 +25,12 @@ public class StageManager : MonoSingleton<StageManager>
         Destroy(_currentStage);
         _currentStageIndex++;
         _currentStage = Instantiate(_stageList[_currentStageIndex], transform);
-        PlayerManager.Instance.PlayerTrm.position = _currentStage.startPosTrm.position;
+        PlayerManager.Instance.Player.MovementCompo.Teleport(_currentStage.startPosTrm.position);
+    }
+
+
+    public void DeregisterEnemy(Enemy enemy)
+    {
+        _currentStage.enemyList.Remove(enemy);
     }
 }

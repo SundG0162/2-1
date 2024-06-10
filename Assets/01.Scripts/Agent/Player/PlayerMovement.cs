@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using DG.Tweening;
 
 public class PlayerMovement : AgentMovement
@@ -27,6 +28,7 @@ public class PlayerMovement : AgentMovement
 
     private bool _lockRotateXAxis = false;
     private bool _forwardMovement = true;
+    private bool _isTeleporting = false;
     private float _xRotation = 0;
     private Vector2 _cameraRotDelta;
 
@@ -53,6 +55,7 @@ public class PlayerMovement : AgentMovement
 
     protected override void FixedUpdate()
     {
+        if (_isTeleporting) return;
         IsGround = _characterController.isGrounded;
         if (_forwardMovement)
             _velocity = GetRotateVelocity() * _player.moveSpeed;
@@ -65,6 +68,22 @@ public class PlayerMovement : AgentMovement
     {
         CameraRotate();
     }
+
+    public void Teleport(Vector3 pos)
+    {
+        StopImmediately();
+        _isTeleporting = true;
+        transform.position = pos;
+        StartCoroutine(DelayMovement());
+    }
+
+    private IEnumerator DelayMovement()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _isTeleporting = false;
+    }
+
+
 
     public override void SetMovement(Vector3 movement)
     {

@@ -11,6 +11,7 @@ public class CommonEnemyDeadState : EnemyState<CommonEnemyStateEnum>
     public override void Enter()
     {
         base.Enter();
+        StageManager.Instance.DeregisterEnemy(_enemyBase);
         GameObject.Destroy(_enemyBase.gameObject);
     }
 }
