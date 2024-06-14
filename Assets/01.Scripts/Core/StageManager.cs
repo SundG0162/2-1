@@ -6,6 +6,7 @@ public class StageManager : MonoSingleton<StageManager>
 {
     [SerializeField]
     private List<Stage> _stageList;
+    [SerializeField]
     private Stage _currentStage;
     public Stage CurrentStage => _currentStage;
     private int _currentStageIndex = 0;
@@ -22,7 +23,7 @@ public class StageManager : MonoSingleton<StageManager>
 
     public void NextStage()
     {
-        Destroy(_currentStage);
+        Destroy(_currentStage.gameObject);
         _currentStageIndex++;
         _currentStage = Instantiate(_stageList[_currentStageIndex], transform);
         PlayerManager.Instance.Player.MovementCompo.Teleport(_currentStage.startPosTrm.position);
