@@ -72,6 +72,7 @@ public class PlayerMovement : AgentMovement
     public void Teleport(Vector3 pos)
     {
         StopImmediately();
+        _player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         _isTeleporting = true;
         transform.position = pos;
         StartCoroutine(DelayMovement());
@@ -79,7 +80,7 @@ public class PlayerMovement : AgentMovement
 
     private IEnumerator DelayMovement()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f);
         _isTeleporting = false;
     }
 

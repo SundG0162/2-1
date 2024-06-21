@@ -9,6 +9,8 @@ public class Door : MonoBehaviour
     private Transform _upDoor, _downDoor, _leftDoor, _rightDoor;
     private Vector3 _upOriginPos, _downOriginPos, _leftOriginPos, _rightOriginPos;
 
+    public bool IsOpened { get; private set; }
+
     private BoxCollider _collider;
 
 
@@ -25,6 +27,7 @@ public class Door : MonoBehaviour
     }
     public void ModifyOpenStatus(bool value)
     {
+        IsOpened = value;
         if (_openSeq != null && _openSeq.IsActive())
         {
             _openSeq.Kill();
