@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9061116129620710638}
   - component: {fileID: 2844661420947815710}
   - component: {fileID: 2021153974866484767}
-  - component: {fileID: 1289708754196695720}
+  - component: {fileID: 4673545489669670227}
   m_Layer: 9
   m_Name: ToggleButton
   m_TagString: Untagged
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1289708754196695720
+--- !u!114 &4673545489669670227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5572197523654023285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927e8cc12e3a12041ac743a62de3bc57, type: 3}
+  m_Script: {fileID: 11500000, guid: c28ae25ecb8b2a047a2fac5b18fb69b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _door: {fileID: 0}

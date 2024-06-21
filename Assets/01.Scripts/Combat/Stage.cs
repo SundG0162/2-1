@@ -7,6 +7,7 @@ public class Stage : MonoBehaviour
 {
     public List<Enemy> enemyList = new List<Enemy>();
     public Transform startPosTrm;
+    public float clearTime;
      
     private void OnValidate()
     {

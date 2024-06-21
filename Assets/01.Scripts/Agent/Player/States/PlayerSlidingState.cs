@@ -18,8 +18,6 @@ public class PlayerSlidingState : PlayerGroundState
         _player.MovementCompo.LocalMoveMainCam(Vector3.up * 0.4f, 0.3f);
         _player.MovementCompo.ModifyForwardMovement(false);
         _player.PlayerInput.OnCrouchUpEvent += HandleOnCrouchUpEvent;
-        Debug.Log("Velocity : " + _player.MovementCompo.Velocity);
-        Debug.Log("Magnitude : " + _player.MovementCompo.Velocity.magnitude);
         if (_player.MovementCompo.Velocity.magnitude < moveSpeedThreshold)
         {
             _stateMachine.ChangeState(PlayerStateEnum.Crouch);

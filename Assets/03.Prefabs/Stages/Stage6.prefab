@@ -455,6 +455,7 @@ MonoBehaviour:
   enemyList:
   - {fileID: 1195369457044341423}
   startPosTrm: {fileID: 6474869675718081923}
+  clearTime: 6
 --- !u!1001 &291896039586946189
 PrefabInstance:
   m_ObjectHideFlags: 0

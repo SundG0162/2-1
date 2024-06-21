@@ -470,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   startPosTrm: {fileID: 2942129655696340524}
+  clearTime: 6
 --- !u!1 &8227760184948916283
 GameObject:
   m_ObjectHideFlags: 0

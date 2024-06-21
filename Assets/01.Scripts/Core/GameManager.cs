@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public float Timer { get; private set; }
-    private bool _isGameStart = false;
+    [SerializeField]
+    private TimerUI _timerUI;
 
     private void Start()
     {
@@ -15,12 +15,19 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
-        if (!_isGameStart) return;
-        Timer += Time.deltaTime;
+        if(_timerUI.IsTimerStart && _timerUI.Timer <= 0)
+        {
+            StageManager.Instance.Restart();
+        }
     }
 
-    public void GameStart()
+    public void StartTimer()
     {
-        _isGameStart = true;
+        _timerUI.StartTimer();
+    }
+
+    public void SetTimer(float Time)
+    {
+        _timerUI.SetTime(Time);
     }
 }
