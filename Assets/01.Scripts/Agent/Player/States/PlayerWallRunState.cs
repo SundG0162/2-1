@@ -54,7 +54,7 @@ public class PlayerWallRunState : PlayerState
         _player.MovementCompo.SetVelocity(wallJumpDir * 30 * Time.fixedDeltaTime);
         _player.MovementCompo.SetMovement(wallJumpDir * 30 * Time.fixedDeltaTime);
         _player.MovementCompo.SetYVelocity(wallJumpDir.y * _player.wallJumpPower);
-        _stateMachine.ChangeState(PlayerStateEnum.WallJump);
+        _stateMachine.ChangeState(PlayerStateEnum.Fall);
     }
 
     public override void UpdateState()

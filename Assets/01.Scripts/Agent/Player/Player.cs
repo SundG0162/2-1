@@ -16,7 +16,6 @@ public enum PlayerStateEnum
     Sliding,
     WallRun,
     Crouch,
-    WallJump,
     Dead
 }
 public class Player : Agent
