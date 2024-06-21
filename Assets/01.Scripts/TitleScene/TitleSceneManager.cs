@@ -18,6 +18,11 @@ public class TitleSceneManager : MonoBehaviour
 
     private Sequence _openingSeq;
 
+    private void Awake()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
+
     private void Update()
     {
         if (_openingSeq != null && _openingSeq.IsActive()) return;
