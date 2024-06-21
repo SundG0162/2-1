@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
 using Random = UnityEngine.Random;
-using UnityEditorInternal;
 
 public class PlayerGun : AgentGun
 {
