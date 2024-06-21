@@ -816,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 156959105}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.31, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8060,8 +8060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9f273d12c4c5c4fa50018cb73fd6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 0
-  _maxHealth: 100
 --- !u!114 &1939567919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8106,8 +8104,8 @@ MonoBehaviour:
   _velocity: {x: 0, y: 0, z: 0}
   _visualCamTrm: {fileID: 88599290}
   _playerMainCam: {fileID: 1718459075}
-  _sensivityX: 15
-  _sensivityY: 7
+  _sensivityX: 10
+  _sensivityY: 4
   _upperLookLimit: -70
   _lowerLookLimit: 70
   _wallCheckerTrm: {fileID: 1958301900}

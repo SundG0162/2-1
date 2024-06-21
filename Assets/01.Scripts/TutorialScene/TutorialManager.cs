@@ -21,6 +21,9 @@ public class TutorialManager : MonoSingleton<TutorialManager>
     {
         _currentStep = _tutorialStepList[0];
         _currentStep.Enter();
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
