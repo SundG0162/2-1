@@ -13,6 +13,8 @@ public class TitleSceneManager : MonoBehaviour
     private CinemachineVirtualCamera _mainCam;
     [SerializeField]
     private TitlePanelUI _titlePanelUI;
+    [SerializeField]
+    private GoToTutorialPanel _goToTutorialPanel;
 
     private Sequence _openingSeq;
 
@@ -27,7 +29,7 @@ public class TitleSceneManager : MonoBehaviour
             _openingSeq.AppendInterval(1f);
             _openingSeq.Append(_mainCam.transform.DOMoveZ(7, 1).SetEase(Ease.InExpo));
             _openingSeq.AppendInterval(1f);
-            _openingSeq.AppendCallback(() => SceneManager.LoadScene("InGameScene"));
+            _openingSeq.AppendCallback(() => _goToTutorialPanel.gameObject.SetActive(true));
         }
     }
 }
