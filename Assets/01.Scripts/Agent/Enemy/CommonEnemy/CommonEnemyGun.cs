@@ -9,6 +9,6 @@ public class CommonEnemyGun : AgentGun
     {
         Bullet bullet = PoolManager.Instance.Pop(PoolingType.Combat_Bullet) as Bullet;
         bullet.transform.position = _firePosTrm.position;
-        bullet.Fire(dir, 10);
+        bullet.Fire(dir, 16);
     }
 }

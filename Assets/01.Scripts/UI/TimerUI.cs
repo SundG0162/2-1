@@ -18,6 +18,8 @@ public class TimerUI : MonoBehaviour
         if (!_isTimerStart) return;
         Timer -= Time.deltaTime;
         _timerText.text = string.Format("{0:N2}", Timer);
+        float ratio = Timer / StageManager.Instance.CurrentStage.clearTime;
+        _timerText.color = Color.Lerp(Color.red, Color.white, ratio);
 
     }
 
@@ -25,8 +27,8 @@ public class TimerUI : MonoBehaviour
     {
         _isTimerStart = false;
         Timer = time;
-        Debug.Log(time);
         _timerText.text = string.Format("{0:N2}", time);
+        _timerText.color = Color.white;
     }
 
     public void StartTimer()

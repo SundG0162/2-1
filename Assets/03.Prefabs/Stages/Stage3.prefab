@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   startPosTrm: {fileID: 1620061653356498667}
-  clearTime: 6
+  clearTime: 5.2
 --- !u!1001 &950663374380117295
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -471,7 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   startPosTrm: {fileID: 2942129655696340524}
-  clearTime: 6
+  clearTime: 4
 --- !u!1 &8227760184948916283
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ PrefabInstance:
     - target: {fileID: 5841808052075011652, guid: c405f1031baf0944eb9fbbb0cc119ae5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.66
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 5841808052075011652, guid: c405f1031baf0944eb9fbbb0cc119ae5,
         type: 3}
@@ -664,7 +664,7 @@ PrefabInstance:
     - target: {fileID: 852275815745666782, guid: 031e040eac1df854199c14b0c5f484ed,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.45
+      value: 2.95
       objectReference: {fileID: 0}
     - target: {fileID: 852275815745666782, guid: 031e040eac1df854199c14b0c5f484ed,
         type: 3}
@@ -674,7 +674,7 @@ PrefabInstance:
     - target: {fileID: 852275815745666782, guid: 031e040eac1df854199c14b0c5f484ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.09
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 852275815745666782, guid: 031e040eac1df854199c14b0c5f484ed,
         type: 3}

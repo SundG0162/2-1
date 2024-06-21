@@ -608,7 +608,7 @@ Transform:
   m_GameObject: {fileID: 302298155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 2.5149999, z: 15.98}
+  m_LocalPosition: {x: 0, y: 1.515, z: 14.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1741,6 +1741,13 @@ MonoBehaviour:
   - {fileID: 5482092980650844167, guid: c1c315a5d0ebb2b418614b8077c4093e, type: 3}
   - {fileID: 8066014749769963980, guid: db8132bb4d5662e4b99cb169febb7447, type: 3}
   - {fileID: 7307786138006624523, guid: 4767f1d1453cf1343857727a1f74c328, type: 3}
+  - {fileID: 602560212521997821, guid: 10ca457aacc78cd489c81a430605f0a2, type: 3}
+  - {fileID: 8549051787502961953, guid: b57e16b3ba6715a45ba193de8e8faffa, type: 3}
+  - {fileID: 6986523734402537490, guid: 2ca611d10cd7e404f9b4f9224ef15069, type: 3}
+  - {fileID: 5859983942297060938, guid: c280170ec4e98bf48bd5bd4cf8b73c62, type: 3}
+  - {fileID: 602560212521997821, guid: f347034e5e276d94194d336ed774254e, type: 3}
+  - {fileID: 5224407031631440914, guid: b249b9d9e0c1f1949a4c9d6f54806039, type: 3}
+  - {fileID: 6505678623104638397, guid: 216bd9e1398f12d44bb47e02a486d55f, type: 3}
   - {fileID: 7072532002535291942, guid: eefa95b0e96cfae4fb75ce5cf70134ca, type: 3}
 --- !u!1 &699657635
 GameObject:
@@ -1928,7 +1935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &818209172
 Transform:
   m_ObjectHideFlags: 0
@@ -2967,7 +2974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1280840608
 Transform:
   m_ObjectHideFlags: 0
@@ -3721,8 +3728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9f273d12c4c5c4fa50018cb73fd6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 0
-  _maxHealth: 100
 --- !u!114 &1602646873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3769,8 +3774,8 @@ MonoBehaviour:
   _playerMainCam: {fileID: 489288574}
   _sensivityX: 15
   _sensivityY: 7
-  _upperLookLimit: -70
-  _lowerLookLimit: 70
+  _upperLookLimit: -90
+  _lowerLookLimit: 90
   _wallCheckerTrm: {fileID: 272501088}
   _whatIsWall:
     serializedVersion: 2
@@ -3793,7 +3798,7 @@ MonoBehaviour:
   crouchMoveSpeed: 6
   slidingSpeed: 30
   wallJumpPower: 0.32
-  wallRunSpeed: 30
+  wallRunSpeed: 37
   defaultMoveSpeed: 0
   defaultJumpPower: 0
   _playerInput: {fileID: 11400000, guid: 836a4721d69f06047b0475d69772cf2b, type: 2}
@@ -3832,7 +3837,7 @@ Transform:
   m_GameObject: {fileID: 1602646871}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 1, z: 15.98}
+  m_LocalPosition: {x: 0, y: 0, z: 14.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
