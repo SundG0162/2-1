@@ -3774,7 +3774,7 @@ MonoBehaviour:
   _velocity: {x: 0, y: 0, z: 0}
   _visualCamTrm: {fileID: 1045555016}
   _playerMainCam: {fileID: 489288574}
-  _sensivityX: 10
+  _sensivityX: 8
   _sensivityY: 4
   _upperLookLimit: -90
   _lowerLookLimit: 90
